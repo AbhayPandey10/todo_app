@@ -34,7 +34,7 @@ app.get("/Todos",(req,res)=>{
 
 app.put("/Completed",(req,res)=> {
     const todoId = req.body
-    const result = updateTodo.safeParse(id)
+    const result = updateTodo.safeParse(todoId)
     if(!result.success){
         res.status(411).json({
             msg : "Invalid Input"
@@ -42,7 +42,7 @@ app.put("/Completed",(req,res)=> {
         return
     }
 
-    todo.update({
+    todo.updateOne({
         _id : todoId.id
     },{
         $set: {completed : true}
